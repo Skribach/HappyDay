@@ -1,0 +1,86 @@
+﻿@model BirthdaysModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="offset-0 col-12 offset-sm-0 col-sm-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6">
+
+        @if (Model != null && (Model.Coming.Count + Model.Current.Count != 0))
+        {
+            @if (Model.Current.Count > 0)
+            {
+                <h2 class="display-4 text-center">TODAY BIRTHDAYS</h2>
+
+                @foreach (var birthday in Model.Current)
+                {
+                    <div class="card card-body m-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <center><img src="@birthday.PhotoUrl" style="height:120px" /></center>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="row mb-4">
+                                    <h5 class="card-title">@birthday.BiDay</h5>
+                                    <p class="card-text">@birthday.FirstName @birthday.LastName</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a asp-controller="birthday" asp-action="AddOrEdit" asp-route-id="@birthday.Id">EDIT</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a asp-controller="birthday" asp-action="Delete" asp-route-id="@birthday.Id">DELETE</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+            @if (Model.Coming.Count > 0)
+            {
+                <h1 class="display-4 text-center">COMING BIRTHDAYS</h1>
+                @foreach (var birthday in Model.Coming)
+                {
+                    <div class="card card-body m-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <center><img src="@birthday.PhotoUrl" style="height:120px" /></center>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="row mb-4">
+                                    <h5 class="card-title">@birthday.BiDay</h5>
+                                    <p class="card-text">@birthday.FirstName @birthday.LastName</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a asp-controller="birthday" asp-action="AddOrEdit" asp-route-id="@birthday.Id">Edit</a>
+                                    </div>
+                                    <div class="col-6">
+                                        <a asp-controller="birthday" asp-action="Delete" asp-route-id="@birthday.Id">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+        else
+        {
+            <h1 class="display-4 text-center">BIRTHDAY'S RECORDS NOT FOUND</h1>
+            <hr />
+        }
+
+        <a class="nav-link text-dark" asp-area="" asp-controller="Birthday" asp-action="AddOrEdit">
+            <div class="card card-body m-4 bg-light">
+                <h class="display-6 text-center">ADD NEW HAPPY DAY</h>
+            </div>
+        </a>
+
+    </div>
+</div>
+

@@ -1,0 +1,56 @@
+﻿@model BirthdayModel
+
+@{
+    if (Model.Id == null)
+    {
+        ViewData["Title"] = "Add birthday record";
+    }
+    else
+    {
+        ViewData["Title"] = "Edit birthday record";
+    }
+}
+
+<h2 class="display-4 text-center">@ViewData["Title"].ToString().ToUpper()</h2>
+<div class="row">
+    <div class="offset-0 col-12 offset-sm-0 col-sm-12 offset-md-2 col-md-8 offset-xl-3 col-xl-6 mb-3">
+        <hr />
+        <section>
+            <form id="acc" method="post" enctype="multipart/form-data" asp-controller="Birthday" asp-action="AddOrEdit" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating m-3">
+                    <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
+                    <label asp-for="FirstName" class="form-label"></label>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating m-3">
+                    <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true" />
+                    <label asp-for="LastName" class="form-label"></label>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating m-3">
+                    <input asp-for="BiDay" class="form-control" autocomplete="biday" aria-required="true" />
+                    <label asp-for="BiDay"></label>
+                    <span asp-validation-for="BiDay" class="text-danger"></span>
+                </div>
+                <div class="form-floating m-3">
+                    <input asp-for="Photo" aria-required="false"/>
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                
+                <input asp-for="PhotoUrl" aria-required="false" value="0" hidden/>
+
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>    
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
